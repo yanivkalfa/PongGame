@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="css/style.css" type="text/css" media="all">
+    <script type="text/javascript" src="supers/utilities/Collection.js"></script>
+    <script type="text/javascript" src="supers/utilities/Point.js"></script>
+    <script type="text/javascript" src="supers/utilities/Vector.js"></script>
+    <script type="text/javascript" src="supers/utilities/Lists.js"></script>
+    <script type="text/javascript" src="supers/Attributes.js"></script>
+    <script type="text/javascript" src="supers/Moves.js"></script>
+    <script type="text/javascript" src="supers/Collision.js"></script>
+    <script type="text/javascript" src="supers/Renderer.js"></script>
+    <script type="text/javascript" src="supers/ScoreBoard.js"></script>
+    <script type="text/javascript" src="supers/KeyBinds.js"></script>
+    <script type="text/javascript" src="supers/Loader.js"></script>
+    <script type="text/javascript" src="supers/Entity.js"></script>
+    <script type="text/javascript" src="supers/Player.js"></script>
+    <script type="text/javascript" src="supers/Loop.js"></script>
+    <script type="text/javascript" src="supers/Ai.js"></script>
+    <script type="text/javascript" src="supers/Roles.js"></script>
+    <script type="text/javascript" src="supers/Game.js"></script>
+
+
+    <script type="text/javascript" src="pong/pong.Roles.js"></script>
+    <script type="text/javascript" src="pong/pong.Ai.js"></script>
+    <script type="text/javascript" src="pong/pong.Attributes.js"></script>
+    <script type="text/javascript" src="pong/pong.Moves.js"></script>
+    <script type="text/javascript" src="pong/pong.Collision.js"></script>
+    <script type="text/javascript" src="pong/pong.BallCollision.js"></script>
+    <script type="text/javascript" src="pong/pong.Renderer.js"></script>
+    <script type="text/javascript" src="pong/pong.ScoreBoard.js"></script>
+    <script type="text/javascript" src="pong/pong.Loader.js"></script>
+    <script type="text/javascript" src="pong/pong.Entity.js"></script>
+    <script type="text/javascript" src="pong/pong.KeyBinds.js"></script>
+    <script type="text/javascript" src="pong/pong.Player.js"></script>
+    <script type="text/javascript" src="pong/pong.RemotePlayer.js"></script>
+    <script type="text/javascript" src="pong/pong.ball.js"></script>
+    <script type="text/javascript" src="pong/pong.Loop.js"></script>
+    <script type="text/javascript" src="pong/pong.Game.js"></script>
+
+    <title>My second game</title>
+</head>
+<body>
+<div id="page">
+    <div id="gameCanvas"></div>
+</div>
+
+</body>
+</html>
+<script type="text/javascript">
+    var Point = window.game.class.Point;
+    var Vector = window.game.class.Vector;
+    var options = {
+        canvas : {
+            node : document.getElementById('gameCanvas'),
+            width : 900,
+            height : 500
+        }
+    };
+    var pong = new window.game.class.PongGame(options);
+    console.log(pong);
+    pong.init();
+    pong.bindKey();
+
+    var pongPlayer = new window.game.class.PongPlayer({id:1231234234,  name : 'Mr.Shmelow', local:true},pong);
+    pongPlayer.init();
+    pong.addPlayer(pongPlayer);
+
+
+    var player2 = new window.game.class.PongRemotePlayer({id:1231234236,  name : 'player2'},pong);
+    player2.init();
+    pong.addPlayer(player2);
+
+    var ball = new window.game.class.PongBall({id:1231234235},pong);
+    ball.init();
+    pong.addEntity(ball);
+
+    setTimeout(function(){
+        console.log('starting ball');
+        ball.ai.start();
+    }, 1000);
+
+
+
+    /*
+     setInterval(function(){
+     vector.x--;
+     vector.y -= 1.5;
+     ball.move(vector);
+     }, 100);
+     */
+
+
+
+    pong.load();
+    pong.start();
+</script>
+
